@@ -20,7 +20,7 @@ SQL Injection (SQLi) is a vulnerability where an attacker interferes with the SQ
 ---
 
 ## Types of SQL Injection
-![SQL Injection Types](https://your-image-link-here.com/TypesofSQLInjection.png)
+![SQL Injection Types](TypesofSQLInjection.png)
 
 ---
 
