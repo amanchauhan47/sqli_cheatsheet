@@ -167,7 +167,7 @@ SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1 OFFSE
 ```
 SELECT COUNT(table_name) FROM information_schema.tables WHERE table_schema=DATABASE();
 ```
-**Find the name of all tables:**  
+**Find length of each table:**  
 ```
 SELECT LENGTH(table_name) FROM information_schema.tables WHERE table_schema = DATABASE() LIMIT {i},1;
 ```
